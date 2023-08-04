@@ -28,22 +28,26 @@ package main
 import (
 	"fmt"
 	"log"
+
 	"net/http"
 
+	"github.com/ilyakaznacheev/cleanenv"
 	"github.com/julienschmidt/httprouter"
 )
 
-
-func IndexHandler(w http.ResponseWriter, r *http.Request, params httprouter.Params){
+func IndexHandler(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	w.WriteHeader(200)
 	w.Write([]byte("Работает"))
 }
 
-
 func main() {
 	fmt.Println("hi!")
-	router:=httprouter.New()
+	var cfg map[string]string
+	cleanenv.ReadConfig("config.yml", &cfg)
+
+	router := httprouter.New()
 	router.GET("/", IndexHandler)
-	log.Fatal(http.ListenAndServe(":8080", router))
-    
+
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", cfg["port"]), router))
+
 }
