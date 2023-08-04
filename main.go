@@ -28,9 +28,7 @@ package main
 import (
 	"fmt"
 	"log"
-
 	"net/http"
-
 	"github.com/ilyakaznacheev/cleanenv"
 	"github.com/julienschmidt/httprouter"
 )
@@ -41,7 +39,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, params httprouter.Para
 }
 
 func main() {
-	log.Println("hi!")
+	log.Println("!i!i!i!")
 	//var cfg map[string]string
 	var cfg Config
 	cleanenv.ReadConfig("config.yml", &cfg)
