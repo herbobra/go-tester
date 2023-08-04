@@ -41,13 +41,15 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, params httprouter.Para
 }
 
 func main() {
-	fmt.Println("hi!")
-	var cfg map[string]string
+	log.Println("hi!")
+	//var cfg map[string]string
+	var cfg Config
 	cleanenv.ReadConfig("config.yml", &cfg)
 
 	router := httprouter.New()
 	router.GET("/", IndexHandler)
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", cfg["port"]), router))
+	// log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", cfg["port"]), router))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", cfg.Port), router))
 
 }
